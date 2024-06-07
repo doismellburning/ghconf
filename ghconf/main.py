@@ -211,6 +211,8 @@ def main() -> None:
                         help="Skip the progress bar")
     parser.add_argument("--plan", dest="plan", action="store_true", default=False,
                         help="Evaluate all changes and show what the tool would change with the current configuration.")
+    parser.add_argument("--show-repo-matches", dest="show_repo_matches", action="store_true", default=False,
+                        help="Show what repositories are matched by the configuration for debugging purposes.")
     parser.add_argument("--execute", dest="execute", action="store_true", default=False,
                         help="Execute any detected changes without asking first. If this is not set, ghconf will ask "
                              "for permission before executing any changes.")
@@ -249,7 +251,9 @@ def main() -> None:
     except GithubException:
         raise utils.ErrorMessage("No such GitHub organization %s for the given API token" % args.org)
 
-    if args.plan:
+    if args.show_repo_matches:
+        print_info("TODO IMPLEMENT ME")
+    elif args.plan:
         # banner
         print_info("=" * (shutil.get_terminal_size()[0] - 15))
         print_info("{{:^{width}}}".format(width=shutil.get_terminal_size()[0] - 15).format("Plan mode"))
